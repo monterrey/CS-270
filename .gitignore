@@ -1,5 +1,8 @@
+*.DS_Store
 *.out
 *.txt
 *.o
 *.pdf
-
+*.tst.c
+*~*
+p1
