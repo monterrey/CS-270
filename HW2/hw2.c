@@ -13,7 +13,10 @@ bool createArray();
 int main(){
   if(createArray() == true){
     //char ** myArrPtr = myArr;
-    quickSort(myArr);
+    quickSort(myArr, 0, LINECOUNT);
+    int i;
+    for(i = 0; i<LINECOUNT; i++)
+      fprintf(stdout, "%c\n", myArr[i][0]);
   }
   return 0;
 }
