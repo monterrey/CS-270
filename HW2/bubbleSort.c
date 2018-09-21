@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "hw2.h"
-void swapA(char s1[CHARCOUNT], char s2[CHARCOUNT]);
-int compareA(char s1[CHARCOUNT], char s2[CHARCOUNT]);
-
+#include "bubbleSort.h"
 void bubbleSort(char myArr[LINECOUNT][CHARCOUNT], int n ){
   int i, j;
   for(i=0;i < n-1; i++)
@@ -22,6 +20,8 @@ void swapA(char s1[CHARCOUNT], char s2[CHARCOUNT]){
     s1[i] = tmp;
   }
 }
+// Returns 0 if strings are equal -1 if string 1 is less than string 2 and 1 if string 1 is greater
+// than string 2
 int compareA(char s1[CHARCOUNT] , char s2[CHARCOUNT] ){
   for(int i =0; i < CHARCOUNT; i++){
     if(s1[i] < s2[i])

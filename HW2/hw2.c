@@ -4,6 +4,8 @@
 #include "hw2.h"
 #include "bubbleSort.h"
 #include "quickSort.h"
+#include "insertionSort.h"
+
 FILE * myfile;
 const int charC = 256;
 const int lineC = 20;
@@ -14,8 +16,11 @@ bool createArray();
 int main(){
   if(createArray() == true){
     //char ** myArrPtr = myArr;
-    //quickSort(myArr, 0, LINECOUNT);
-    bubbleSort(myArr , LINECOUNT );
+    quickSort(myArr, 0, LINECOUNT);
+    //createArray();
+    //bubbleSort(myArr , LINECOUNT );
+    //createArray();
+    //insertionSort(myArr);
     int i;
     for(i = 0; i<LINECOUNT; i++)
       fprintf(stdout, "%c\n", myArr[i][0]);

@@ -2,16 +2,34 @@
 #include <stdlib.h>
 #include "quickSort.h"
 #include "hw2.h"
+#include "bubbleSort.h"
 
-int quickSort(char ** arrPTR, int first , int last){
-  /*int col = 5, row = 4 ;
-  fprintf(stdout,"IN Quicksort %c\n", *((char*)arrPTR + col*CHARCOUNT+LINECOUNT));
-  int tst = compare(arrPTR, 2,1);
-  fprintf(stdout, "tst : %d" , tst);
-  swap(arrPTR, 1,2);
-    tst = compare(arrPTR, 2,1);
-    fprintf(stdout, "TST : %d", tst);*/
+void quickSort(char myArr[LINECOUNT][CHARCOUNT] , int first, int last){
+  int piv ;
+  if(first < last){
+    piv = pivot(myArr , first, last);
+    quickSort(myArr, first, piv-1);
+    quickSort(myArr, piv+1, last);
+  }
+}
+
+int pivot(char myArr[LINECOUNT][CHARCOUNT], int first, int last){
+  int p = first;
+  int pivot = first;
+  int i;
+  for(i = first+1; i<=last; i++){
+    if(compareA(myArr[i], myArr[pivot]) <= 0 ){
+      p++;
+      swapA(myArr[i], myArr[p]);
+    }
+  }
+  swapA(myArr[p], myArr[first]);
+  //fprintf(stdout,"P: %d", p);
+  return p;
   
+}
+/*
+int quickSort(char ** arrPTR, int first , int last){
   int piv;
   if(first < last){
     piv = pivot(arrPTR, first, last);
@@ -44,7 +62,6 @@ int compare(char ** arrPTR, int fLineIndex, int sLineIndex){
       return 1;
     else if(SLC > FLC )
       return -1;
-    
   }
   return 0;
 }
@@ -55,8 +72,6 @@ void swap(char **arrPTR, int line1, int line2){
   for(i=0; i< CHARCOUNT; i++){
     FLC = *((char*)arrPTR + line1 * CHARCOUNT + i);
     SLC = *((char*)arrPTR + line2 * CHARCOUNT + i);
-
     *((char*)arrPTR + line1 * CHARCOUNT + i) = SLC;
-    *((char*)arrPTR + line2 * CHARCOUNT + i) = FLC;
-  }
-}
+    *((char*)arrPTR + line2 * CHARCOUNT + i) = FLC;}}
+    */
