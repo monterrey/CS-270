@@ -23,7 +23,8 @@ void swapA(char s1[CHARCOUNT], char s2[CHARCOUNT]){
 // Returns 0 if strings are equal -1 if string 1 is less than string 2 and 1 if string 1 is greater
 // than string 2
 int compareA(char s1[CHARCOUNT] , char s2[CHARCOUNT] ){
-  for(int i =0; i < CHARCOUNT; i++){
+int i;  
+for(i =0; i < CHARCOUNT; i++){
     if(s1[i] < s2[i])
       return -1;
     else if(s2[i] < s1[i])

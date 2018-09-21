@@ -5,32 +5,60 @@
 #include "bubbleSort.h"
 #include "quickSort.h"
 #include "insertionSort.h"
-
+#include <time.h>
 FILE * myfile;
 const int charC = 256;
 const int lineC = 20;
-int CHARCOUNT = charC;
-int LINECOUNT = lineC;
-char myArr[lineC][charC];
+//int CHARCOUNT = charC;
+//int LINECOUNT = lineC;
+char myArr[LINECOUNT][CHARCOUNT];
+char backUp[LINECOUNT][CHARCOUNT];
+void duplicateArr();
 bool createArray();
+time_t start_t, end_t;
+double diff_t;
+
 int main(){
   if(createArray() == true){
-    //char ** myArrPtr = myArr;
-    quickSort(myArr, 0, LINECOUNT);
-    //createArray();
-    //bubbleSort(myArr , LINECOUNT );
-    //createArray();
-    //insertionSort(myArr);
-    int i;
-    for(i = 0; i<LINECOUNT; i++)
-      fprintf(stdout, "%c\n", myArr[i][0]);
+    	//char ** myArrPtr = myArr;
+    	duplicateArr();
+	time(&start_t);
+    	bubbleSort(backUp , LINECOUNT );
+    	time(&end_t);
+	diff_t = difftime(end_t, start_t);
+	fprintf(stdout, "Bubble sort took %f seconds to complete\n", diff_t);
+	duplicateArr();
+	//createArray();
+	time(&start_t);
+	insertionSort(backUp);
+	time(&end_t);
+	diff_t = difftime(end_t, start_t);
+	fprintf(stdout, "Insertion sort took %f seconds to complete \n", diff_t);
+	duplicateArr();
+	time(&start_t);
+	quickSort(backUp,0 , LINECOUNT);
+	time(&end_t);
+	diff_t = difftime(end_t, start_t);
+	fprintf(stdout, "Quick sort took %f seconds to complete\n", diff_t);	
+	//createArray();
+	////quickSort(myArr, 0, LINECOUNT);
+    //int i;
+    //for(i = 0; i<LINECOUNT; i++)
+      //fprintf(stdout, "%c\n", myArr[i][0]);
   }
   return 0;
 }
 
-
+void duplicateArr(){
+int i,j;
+for( i = 0; i< LINECOUNT; i++){
+for(j= 0; j<CHARCOUNT; j++){
+backUp[i][j] = myArr[i][j];
+}
+}
+}
 bool createArray(){
-  myfile = fopen("data/data1.txt", "r");
+  myfile = fopen("hw2data.txt", "r");
   int i , j;  
   if(myfile){
     for(i = 0; i < LINECOUNT; i++){
