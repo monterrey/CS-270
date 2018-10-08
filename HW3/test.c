@@ -4,18 +4,23 @@
 
 int main(){
   int * myInt;
-  //fprintf(stdout, "myInt Val %d\n", *myInt);
-  fprintf(stdout, "size of int: %d\n",(int) sizeof(int));
-  int errc;
-  errc = qmem_alloc(sizeof(int), (void **)&myInt); 
-  if(errc != 0){
+  int * myInt2;
+  int errc, errc2, err3, diff;
+  errc = qmem_alloc(sizeof(int), (void **)&myInt);
+  errc2 = qmem_alloc(sizeof(int), (void **)&myInt2);
+  unsigned res;
+  qmem_size(myInt, &res);
+  err3 = qmem_cmp(myInt, myInt2,&diff); 
+  /*errc = qmem_alloc(sizeof(int), (void **)&myInt); 
+  int * myInt2;
+  int err2 = qmem_alloc(sizeof(int), (void**) &myInt2);
+   if(errc != 0){
   fprintf(stdout, "An error occured");
   }else{
-    fprintf(stdout, "myInt Val %d\n", *(myInt+1));
+    unsigned n ;
+    qmem_size(myInt, &n);
+    fprintf(stdout, "N val : %ld\n",n);
   }
-
-
-
 
   unsigned long u1, u2;
   errc = qmem_stats(&u1, &u2);
@@ -24,6 +29,7 @@ int main(){
   }else{
     fprintf(stdout, "Num allocs : %ld \n Num bytes allocd : %ld \n", u1, u2);
   } 
+  */
   return 0;
   
 }
