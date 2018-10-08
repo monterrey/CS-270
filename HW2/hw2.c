@@ -20,10 +20,15 @@ double diff_t;
 
 int main(){
   if(createArray() == true){
+
+
     	//char ** myArrPtr = myArr;
     	duplicateArr();
+
 	time(&start_t);
-    	bubbleSort(backUp , LINECOUNT );
+	fprintf(stdout ," going to start bubble sort\n");
+
+    	//bubbleSort(backUp , LINECOUNT );
     	time(&end_t);
 	diff_t = difftime(end_t, start_t);
 	fprintf(stdout, "Bubble sort took %f seconds to complete\n", diff_t);
@@ -45,6 +50,8 @@ int main(){
     //int i;
     //for(i = 0; i<LINECOUNT; i++)
       //fprintf(stdout, "%c\n", myArr[i][0]);
+	
+
   }
   return 0;
 }

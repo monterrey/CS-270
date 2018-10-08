@@ -1,5 +1,5 @@
 qmem: qmem.c
-	gcc-8 -c qmem.c
+	gcc -c qmem.c
 clean:
 	rm *.o
 test: qmem.o test.c
