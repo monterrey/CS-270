@@ -27,8 +27,9 @@ int qmem_alloc(unsigned num_bytes, void ** rslt){
   
 }
 int qmem_allocz(unsigned num_bytes, void ** rslt){
+
   unsigned offset= sizeof(char)*4 + sizeof(unsigned);
-  *rslt = (void *) calloc(offset+num_bytes, 1);
+  *rslt = (void *) calloc(1,offset+num_bytes);
   if(rslt == NULL){
     return -1;
   }
@@ -68,7 +69,8 @@ int qmem_allocv(unsigned num_bytes, int mark, void ** rslt){
    ptr++;
    unsigned * bytesAlloc = (unsigned *) ptr;
    *bytesAlloc = num_bytes;
-   char * setM = (char *) *(rslt+1);
+   bytesAlloc++;
+   char * setM = (char *) bytesAlloc;
   for(i = 0; i< (int) num_bytes; i++){
     *(setM+i) = lowerbits;
   }
@@ -86,19 +88,25 @@ int qmem_free(void ** data){
     return -3;
   char * setter = (char *)*data;
   setter = '\0';
-  free(*(data+1));
   free(*(data));
-  fprintf(stdout, "Status : %d ", validity);
+  //fprintf(stdout, "Status : %d ", validity);
   return 0;
 }
 int qmem_cmp(void * p1, void * p2, int * diff){
   //  fprintf(stdout, "Int val : %d ", is_valid(p1) );
+  if(p1 == NULL)
+    return -1;
+  if(p2 == NULL)
+    return -2;
   unsigned offset = (sizeof(char)*4)+ sizeof(unsigned);
   unsigned s1, s2;
   int err1, err2, i, minSize,maxSize;
-  int isEqual = 1;
   err1 = qmem_size(p1,&s1);
   err2 = qmem_size(p1,&s2);
+  if(err1 == -3)
+    return -3;
+  if(err2 == -3)
+    return -4;
   char * ptr1 = (char *) p1;
   char * ptr2 = (char *) p2;
   ptr1 += offset;
@@ -113,13 +121,13 @@ int qmem_cmp(void * p1, void * p2, int * diff){
     minSize = s1;
     maxSize = s2;
   }
-  for(i = 0; i<minSize ; i++){
+  /*for(i = 0; i<minSize ; i++){
     if(*(ptr1+i) != *(ptr2+i) ){
       return 0;
     }
-  }
+    }*/
   *diff =  maxSize - minSize;
-  return isEqual;
+  return 0;
   //fprintf(stdout, "s1 : %ld , s2 : %ld", s1, s2);
   //if(is_valid(p1) == 1 && is_valid(p2))
   //  fprintf(stdout, "valid \n");
@@ -218,6 +226,7 @@ int is_valid(void * data){
   char * ptr = (char *) data ;
   char * str = "luis";
   int i;
+  //  fprintf(stdout, "f val : %c", *ptr);
   for(i =0 ; i < 4; i++){
     if(*(ptr+i) != str[i]){
       return 0;
