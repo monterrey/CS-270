@@ -10,3 +10,5 @@ bubbleSort.o: bubbleSort.c
 	gcc -c bubbleSort.c 
 insertionSort.o: insertionSort.c
 	gcc -c insertionSort.c 
+run:
+	./hw2

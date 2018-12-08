@@ -2,7 +2,11 @@
 *.out
 *.txt
 *.o
+*.map
+*.a
+*.out
 *.pdf
 *.tst.c
 *~*
 p1
+*.tar
