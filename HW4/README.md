@@ -1,6 +1,6 @@
-#CS270 - System Software
+# CS270 - System Software
 
-##Homework \#4
+## Homework \#4
 
 Fall 2018
 
